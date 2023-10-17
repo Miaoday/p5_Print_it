@@ -1,2 +1,2 @@
-# p5_Print_it 
+# p5_print_it 
 # projet_javascript
