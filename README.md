@@ -1,2 +1,1 @@
-# p5_print_it 
-# projet_javascript
+# Print-It WebSite v.1
