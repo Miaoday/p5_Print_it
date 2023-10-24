@@ -1,5 +1,5 @@
 console.log("Hello World");
-
+ 
 const slides = [
 	{
 		"image":"slide1.jpg",
