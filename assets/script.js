@@ -1,12 +1,38 @@
-const track = document.querySelector('.banner-img');
+
+
+const addImage = document.createElement('img');
+addImage.source = 	'./assets/images/slideshow/slide2.jpg';
+					'./assets/images/slideshow/slide3.jpg',
+	 				'./assets/images/slideshow/slide4.png', 
+
+addImage.className = 'banner-image';
+const track = document.getElementById('banner');
 const slideShow = Array.from(track.children);
-console.log(slideShow); 
+
+const slideWidth = slideShow[0].getBoundingClientRect().width;
+
+console.log(addImage);
+
+
+const imagePath = [
+	 
+	 
+ ]
+ imagePath.forEach(image => {
+	const addImage = document.createElement('img');
+	image.source = imagePath;
+	addImage.className = 'banner-image';
+	const carrousel = document.getElementById('banner');
+
+ })
+
+
 const leftButton = document.querySelector('.arrow_left');
 const rightButton = document.querySelector('.arrow_right');
 const dotsBar = document.querySelector('.dots');
 const dots= Array.from(dotsBar.children);
 console.log(dots);
-const slideWidth = slideShow[0].getBoundingClientRect().width;
+
 //const slideSize = slideShow[0].getBoundingClientRect();
 //const slideWidth = slideSize.width;
 // arrange the width of each slide
@@ -28,7 +54,7 @@ rightButton.addEventListener('click', e => {
 	const nextSlide = currentSlide.nextElementSibling;
 	const slideToLeft = nextSlide.style.left;
 	track.style.transform = 'translate(-' + slideToLeft +')';
-	// track.style.transform = 'translat'('-' + 'slideToLeft');
+	// track.style.transform = 'translat'('-' + 'slideToLeft'); pourquoi pas ecrit comme ca 
 	currentSlide.classList.remove('current_slide');
 	nextSlide.classList.add('current_slide');
 })
