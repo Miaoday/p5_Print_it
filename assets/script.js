@@ -16,84 +16,87 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
-console.log(slides);
-
-// Add all images to the track
 const track = document.getElementById('banner');
+const imageOfSlide = document.querySelector('.banner-img');
 const tagLine = document.querySelector('p');
 const firstSlide = track.children[0];
-console.log(firstSlide);
+const wholeSlide = slides.length;
 
-for (let i = 1; i< slides.length; i++) {
+let currentSlide = 0;
+
+// add image to the slideimage
+for (let i = 1; i< wholeSlide; i++) {
    const addImage = document.createElement('img');
+   // addImage.src = element.innerHTML = `<img src="./assets/images/slideshow/${slides[i].image}">`;
    addImage.classList.add('banner-img');
-   addImage.src = `./assets/images/slideshow/${slides[i].image}`;
+   addImage.src = `./assets/images/slideshow/${slides[currentSlide].image}`;
    addImage.alt = 'Banner Print-it';  
-   track.appendChild(addImage, firstSlide);
+   // track.appendChild(addImage, firstSlide);
    track.insertBefore(addImage, tagLine);
 }
 
-
-const leftButton = document.querySelector('.arrow_left');
-const rightButton = document.querySelector('.arrow_right');
-
-leftButton.addEventListener('click', (e) => {
-   console.log("clicked on the left button");
-   // when I click on the left button the slide move to the left
-
-})
-rightButton.addEventListener('click', (e) => {
-   console.log("clicked on the right button");
-   // when I click on the right button the slide move to the right
-
-})
-// get the number of slides and connect the to the dots container
-// create the slides of dots
-
+// Add the dots to the track
 function createDots() {
    const dotsContainer = document.querySelector('.dots'); 
-   dotsContainer.innerHTML = '<div class="dots"></div>';
    
-   for (let i = 0; i < slides.length; i++) {
+   for (let i = 0; i < wholeSlide; i++) {
       const dot = document.createElement('div');
       dot.classList.add('dot');
       dotsContainer.appendChild(dot);
-   // Add the selected class to the current slide
-      if (i === 0) {
-         
-      }
+      // dot.addEventListener('click', () => {
+         // updateSlide(i);
+      // });
    }
 }
-// Appel de la fonction createDots
+// Calling the function createDots
 createDots();
+// update the image according to the currentSlideIndex 
 
-let currentSlideIndex = 0;
 
+function updateSlide(index) {  
+   currentSlide = index;  
+   const currentImage = slides[currentSlide].image;
+   imageOfSlide.src = `./assets/images/slideshow/${currentImage}`;
+   // const index = currentSlide;
+   // const direction = index > currentSlide? 'right' : 'left';
+   // if (direction === 'right') {
+      // currentSlide = (currentSlide + 1) % wholeSlide;
+   // } else if (direction === 'left') {
+      // currentSlide = (currentSlide - 1 + wholeSlide) % wholeSlide;
+   // }
+   updateDots();
+   updateTagLine(index);
+}
 // update the dots when I click on the dot
 function updateDots() {
-   
    const allDots = document.querySelectorAll('.dot')
-
-   allDots.forEach(dot => {
-      dot.classList.remove('dot_selected');
-   });
-   allDots[currentSlideIndex].classList.add('dot_selected');
-}
-
-updateDots();
-
-// update the photo when I click on the dot 
-function updateSlide() {
-   
-   const slideShow = document.querySelectorAll('.banner-image');
-   
-
-   // update the image according to the currentSlideIndex 
-   slideShow.forEach((slide, index) => {
-     slide.style.left = `${(index - currentSlideIndex) * 100}%`;
-   });
  
-   // update the tagLing text according to the currentSlideIndex
-   
+    allDots.forEach(dot => {
+       dot.classList.remove('dot_selected');
+    });
+    allDots[currentSlide].classList.add('dot_selected');
+ }
+
+ // update the tagLing text according to the currentSlideIndex
+function updateTagLine (index) {
+   tagLine.innerHTML = slides[index].tagLine;
 }
+
+// function handleClickArrow(direction) {}
+const rightButton = document.querySelector('.arrow_right');
+const leftButton = document.querySelector('.arrow_left');
+
+rightButton.addEventListener('click', (e) => { 
+   const nextSlide = (currentSlide + 1) % wholeSlide;
+   updateSlide(nextSlide);
+   console.log("clicked on the right button on the slide show");
+   // when I click on the right button the slide move to the right
+});
+
+leftButton.addEventListener('click', (e) => {  
+   const prevSlide = (currentSlide - 1 + wholeSlide) % wholeSlide;
+   updateSlide(prevSlide);
+   console.log("clicked on the left button on the slide show");
+   // when I click on the left button the slide move to the left
+});
 
