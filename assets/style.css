@@ -53,9 +53,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-body {
-
-}
 section {
 	margin-block: 6em;
 }
@@ -125,6 +122,11 @@ header {
 /* Gestion des fleches du carrousel */
 #banner .arrow {
 	position: absolute;
+	cursor: pointer;
+}
+#banner button {
+	background-color: transparent;
+	border: 0;
 }
 #banner .arrow_left {
 	left: 10px;
@@ -136,7 +138,9 @@ header {
 .dots {
 	position: absolute;
 	bottom: 40px;
+	cursor: pointer;
 	display: flex;
+	transform: translateX(-50px);
 }
 .dot {
 	margin-inline: 5px;
@@ -144,8 +148,8 @@ header {
 	height: 13px;
 	background-color: #ffffff00;
 	border: 3px solid #fff;
-	border-radius: 100%;
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);;
+	border-radius: 50%;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 .dot_selected {
 	background-color: #fff;
@@ -178,7 +182,6 @@ header {
 	padding-left:2em;
 	width: 65%;
 	margin-bottom: 1em;
-
 }
 
 #products {
