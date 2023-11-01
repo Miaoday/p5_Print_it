@@ -19,21 +19,21 @@ const slides = [
 const track = document.getElementById('banner');
 const imageOfSlide = document.querySelector('.banner-img');
 const tagLine = document.querySelector('p');
-const firstSlide = track.children[0];
 const wholeSlide = slides.length;
-
+// la positione actuelle d slides(array/tableau)
 let currentSlide = 0;
 
 // add image to the slideimage
-for (let i = 1; i< wholeSlide; i++) {
-   const addImage = document.createElement('img');
-   // addImage.src = element.innerHTML = `<img src="./assets/images/slideshow/${slides[i].image}">`;
-   addImage.classList.add('banner-img');
-   addImage.src = `./assets/images/slideshow/${slides[currentSlide].image}`;
-   addImage.alt = 'Banner Print-it';  
-   // track.appendChild(addImage, firstSlide);
-   track.insertBefore(addImage, tagLine);
+function addImage() {
+   for (let i = 0; i < wholeSlide; i++) {
+   const imageActuelle = track.appendChild(document.createElement('img'));
+   imageActuelle.classList.add('banner-img');
+   imageActuelle.src = `./assets/images/slideshow/${slides[i].image}`;
+   imageActuelle.alt = 'Banner Print-it';  
+   track.insertBefore (imageActuelle, track.firstChild);
 }
+}
+addImage();
 
 // Add the dots to the track
 function createDots() {
@@ -43,30 +43,21 @@ function createDots() {
       const dot = document.createElement('div');
       dot.classList.add('dot');
       dotsContainer.appendChild(dot);
-      // dot.addEventListener('click', () => {
-         // updateSlide(i);
-      // });
    }
 }
 // Calling the function createDots
 createDots();
+
 // update the image according to the currentSlideIndex 
-
-
 function updateSlide(index) {  
    currentSlide = index;  
    const currentImage = slides[currentSlide].image;
    imageOfSlide.src = `./assets/images/slideshow/${currentImage}`;
-   // const index = currentSlide;
-   // const direction = index > currentSlide? 'right' : 'left';
-   // if (direction === 'right') {
-      // currentSlide = (currentSlide + 1) % wholeSlide;
-   // } else if (direction === 'left') {
-      // currentSlide = (currentSlide - 1 + wholeSlide) % wholeSlide;
-   // }
+
    updateDots();
    updateTagLine(index);
 }
+
 // update the dots when I click on the dot
 function updateDots() {
    const allDots = document.querySelectorAll('.dot')
@@ -75,6 +66,7 @@ function updateDots() {
        dot.classList.remove('dot_selected');
     });
     allDots[currentSlide].classList.add('dot_selected');
+
  }
 
  // update the tagLing text according to the currentSlideIndex
@@ -82,7 +74,7 @@ function updateTagLine (index) {
    tagLine.innerHTML = slides[index].tagLine;
 }
 
-// function handleClickArrow(direction) {}
+// clicking for moving the slide show
 const rightButton = document.querySelector('.arrow_right');
 const leftButton = document.querySelector('.arrow_left');
 
