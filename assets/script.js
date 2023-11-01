@@ -56,6 +56,7 @@ function updateSlide(index) {
    imageOfSlide.src = `./assets/images/slideshow/${currentImage}`;
    imageOfSlide.classList.add('banner-img');
    imageOfSlide.alt = 'Banner Print-it';
+   // calling the function updateDots & updateTagLine at the same time
    updateDots();
    updateTagLine(index);
 }
