@@ -17,30 +17,16 @@ const slides = [
 	}
 ]
 const track = document.getElementById('banner');
-// const imageOfSlide = document.querySelector('banner-img');
 const imageOfSlide = document.getElementById('carrousel-img');
 const tagLine = document.querySelector('p');
 const numberOfSlide = slides.length;
-// la positione actuelle d slides(array/tableau)
-let currentSlide = 0;
 
-// // add image to the slides
-// function addImage() {
-//    for (let i = 0; i < numberOfSlide; i++) {
-//    const imageElement = track.appendChild(document.createElement('img'));
-//    imageElement.classList.add('banner-img');
-//    imageElement.src = `./assets/images/slideshow/${slides[i].image}`;
-//    imageElement.alt = 'Banner Print-it';  
-//    track.insertBefore (imageElement, track.firstChild);
-// }
-// }
-// // calling the function addImage
-// addImage();
+// la positione actuelle dans les slides(array/tableau)
+let currentSlide = 0;
 
 // Add the dots to the track
 function createDots() {
    const dotsContainer = document.querySelector('.dots'); 
-   
    for (let i = 0; i < numberOfSlide; i++) {
       const dot = document.createElement('div');
       dot.classList.add('dot');
@@ -55,12 +41,10 @@ createDots();
 // update the dots when I click on the dot
 function updateDots() {
    const allDots = document.querySelectorAll('.dot')
- 
    allDots.forEach(dot => {
       dot.classList.remove('dot_selected');
    });
-      allDots[currentSlide].classList.add('dot_selected');
-   
+   allDots[currentSlide].classList.add('dot_selected'); 
  }
 
 // update the image according to the currentSlideIndex 
@@ -68,25 +52,16 @@ function updateSlide(index) {
    currentSlide = index;  
    const currentImage = slides[currentSlide].image;
    imageOfSlide.src = `./assets/images/slideshow/${currentImage}`;
-   // imageOfSlide.classList.add('banner-img');
-   // imageOfSlide.alt = 'Banner Print-it';
-   // // calling the function updateDots & updateTagLine at the same time
-   // updateDots();
-   // updateTagLine(index);
-   // update the tagLing text according to the currentSlideIndex
+   // update the tagLine text according to the currentSlideIndex
    tagLine.innerHTML = slides[index].tagLine;
 }
-
-//  // update the tagLing text according to the currentSlideIndex
-// function updateTagLine (index) {
-//    tagLine.innerHTML = slides[index].tagLine;
-// }
 
 // clicking for moving the slide show
 const rightButton = document.querySelector('.arrow_right');
 const leftButton = document.querySelector('.arrow_left');
 
 rightButton.addEventListener('click', (e) => { 
+   console.log(e)
    const nextSlide = (currentSlide + 1) % numberOfSlide;
    updateSlide(nextSlide);
    updateDots();
